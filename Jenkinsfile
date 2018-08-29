@@ -12,4 +12,7 @@ pipeline {
       }
     }
   }
+  environment {
+    Path = '%Path%;C:\\Packer;'
+  }
 }
