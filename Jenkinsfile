@@ -3,7 +3,12 @@ pipeline {
   stages {
     stage('Packer') {
       steps {
-        powershell 'Write-Output "Hellooooo"'
+        powershell 'packer.exe -var-file="c:\\packer\\pso\\dse-vars.json" "c:\\packer\\pso.json"'
+      }
+    }
+    stage('Terraform') {
+      steps {
+        powershell(script: 'Write-Output "Terraform"', returnStdout: true)
       }
     }
   }
