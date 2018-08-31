@@ -15,9 +15,19 @@ pipeline {
         }
       }
     }
-    stage('Terraform') {
+    stage('Terraform DB') {
       steps {
         powershell(script: 'Write-Output "Terraform"', returnStdout: true)
+      }
+    }
+    stage('Configure DB') {
+      steps {
+        powershell 'Write-Output "Hello"'
+      }
+    }
+    stage('Terraform Compute') {
+      steps {
+        powershell 'Write-Output "Hello"'
       }
     }
   }
