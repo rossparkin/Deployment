@@ -2,8 +2,17 @@ pipeline {
   agent any
   stages {
     stage('Packer') {
-      steps {
-        powershell 'packer.exe build -var-file="c:\\packer\\pso\\dse-vars.json" "c:\\packer\\pso.json"'
+      parallel {
+        stage('Packer Interface') {
+          steps {
+            powershell 'packer.exe build -var-file="c:\\packer\\pso\\dse-vars.json" "c:\\packer\\pso.json"'
+          }
+        }
+        stage('Packer DSE') {
+          steps {
+            powershell(script: 'Write-Output "Building DSE image"', returnStdout: true)
+          }
+        }
       }
     }
     stage('Terraform') {
